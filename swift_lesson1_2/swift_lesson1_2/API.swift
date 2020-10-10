@@ -17,11 +17,11 @@ class API {
 		request.setValue("application/json", forHTTPHeaderField:"Content-Type")
 		request.setValue("application/json", forHTTPHeaderField: "accept")
 		request.setValue("191deda891dd58164392cd9975a35a01", forHTTPHeaderField: "x-ibm-client-id")
-		request.httpBody = try? JSONSerialization.data(withJSONObject: ["content": img], options: .prettyPrinted)
+		request.httpBody = try? JSONSerialization.data(withJSONObject: ["content": img])
 
 		let session = URLSession.shared
 		session.dataTask(with: request) { data, response, error in
-			guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200,
+			guard let httpResponse = response as? HTTPURLResponse,
 				let jsonData = data else {
 					fail(.responseProblem)
 					return

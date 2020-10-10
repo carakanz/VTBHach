@@ -69,7 +69,9 @@ class PresenterForLoadImageView: CleanSwiftPresentationLogic {
 				completion(carName)
 			}
 		}) { (error) in
-			self.viewController?.alertOtherMistake()
+//			self.viewController.present(AlertAnswer.otherProblem.alert, animated: true, completion: nil)
+
+//			self.viewController?.alertOtherMistake()
 		}
 	}
 

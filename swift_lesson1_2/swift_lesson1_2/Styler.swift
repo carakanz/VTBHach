@@ -42,7 +42,7 @@ class Styler {
         button.layer.borderWidth = 2
 		button.layer.borderColor = UIColor(red: 0.00, green: 0.38, blue: 1.00, alpha: 1.00).cgColor
         button.setTitleColor(UIColor(red: 0.00, green: 0.38, blue: 1.00, alpha: 1.00), for: .normal)
-        button.titleLabel?.font = UIFont(name: "Copperplate-Bold", size: 13)
+        button.titleLabel?.font = UIFont(name: "Inter-Bold", size: 13)
 		button.layer.cornerRadius = 4.0
         button.tintColor = UIColor.white
     }

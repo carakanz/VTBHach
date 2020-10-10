@@ -16,11 +16,14 @@ protocol CleanSwiftDisplayLogic: class {
 	func alertNoCam()
 	func alertOtherMistake()
 	func displayCarName(carName: String)
-
 //    func showAlert()
 }
 
 class LoadImageVC: UIViewController, CleanSwiftDisplayLogic {
+	func alertOtherMistake() {
+		
+	}
+
     var interactor: CleanSwiftBusinessLogic?
     var presenter: CleanSwiftPresentationLogic?
 //    var delegate: ImageImportProtocol?
@@ -89,15 +92,15 @@ class LoadImageVC: UIViewController, CleanSwiftDisplayLogic {
 	    }
 
 	func buildView() {
-        predictedCar.frame = CGRect(x: 30, y: 290, width: view.frame.width - 60, height: 150)
+        predictedCar.frame = CGRect(x: 30, y: 400, width: view.frame.width - 60, height: 150)
 
-        imageView.frame = CGRect(x: 30, y: 30, width: view.frame.width - 60, height: 150)
+        imageView.frame = CGRect(x: 30, y: 90, width: view.frame.width - 60, height: 150)
         imageView.image = UIImage(named: "noImg")
         imageView.contentMode = .scaleAspectFill
-        galleryButton.frame = CGRect(x: 30, y: 200, width: view.frame.width - 60, height: 50)
+        galleryButton.frame = CGRect(x: 30, y: 330, width: view.frame.width - 60, height: 50)
         galleryButton.setTitle("Загрузить фото", for: .normal)
         galleryButton.addTarget(self, action: #selector(showActionSheet), for: .touchUpInside)
-		nextButton.frame = CGRect(x: 30, y: 270, width: view.frame.width - 60, height: 50)
+		nextButton.frame = CGRect(x: 30, y: 390, width: view.frame.width - 60, height: 50)
         nextButton.setTitle("Далее", for: .normal)
         nextButton.addTarget(self, action: #selector(showActionSheet), for: .touchUpInside)
 		helper.styleHollowButton(nextButton)
@@ -128,7 +131,6 @@ class LoadImageVC: UIViewController, CleanSwiftDisplayLogic {
 		actionSheet.addAction(camera)
 		actionSheet.addAction(gallery)
 		actionSheet.addAction(cancel)
-
 		present(actionSheet, animated: true, completion: nil)
 	}
 
@@ -139,9 +141,9 @@ class LoadImageVC: UIViewController, CleanSwiftDisplayLogic {
         self.present(alert, animated: true, completion: nil)
 	}
 
-	func alertOtherMistake() {
-		self.present(AlertAnswer.otherProblem.alert, animated: true, completion: nil)
-	}
+//	func alertOtherMistake() {
+//		self.present(AlertAnswer.otherProblem.alert, animated: true, completion: nil)
+//	}
 
 }
 
