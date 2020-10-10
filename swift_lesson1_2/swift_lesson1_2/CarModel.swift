@@ -9,14 +9,14 @@ import UIKit
 
 class CarModel {
     var title: String
-    var detail: String
-    var cover: UIImage
+    var price: Int
+    var photo: UIImage
     var favorite: Bool
     
     init(title: String) {
         self.title = title
-        self.cover = UIImage(named: "Car")!
-        self.detail = "Unknown"
+        self.photo = UIImage(named: "Car")!
+        self.price = 0
         self.favorite = false
     }
 }

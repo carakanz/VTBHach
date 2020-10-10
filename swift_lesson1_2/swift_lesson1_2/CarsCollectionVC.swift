@@ -23,15 +23,13 @@ class CarsCollectionVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController!.navigationBar.tintColor = .white
+        self.navigationController!.navigationBar.barTintColor = .blue
+        navigationItem.title = "Избранное"
         setCollectionView()
         loadData()
     }
-    
-    
-    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.willTransition(to: newCollection, with: coordinator)
-        collectionView.collectionViewLayout.invalidateLayout()
-    }
+
     
     // MARK: - Configurations
     
@@ -62,7 +60,6 @@ class CarsCollectionVC: UIViewController {
     }
 }
 
-
 // MARK: - UICollectionViewDataSource & UICollectionViewDelegate
 
 extension CarsCollectionVC: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -85,7 +82,7 @@ extension CarsCollectionVC: UICollectionViewDataSource, UICollectionViewDelegate
 extension CarsCollectionVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: CarCollectionViewCell.Locals.height)
+        return CGSize(width: collectionView.frame.width, height: collectionView.frame.width*0.75)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -95,5 +92,12 @@ extension CarsCollectionVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let carVC = CarDetailsVC()
+        carVC.setCar(carModels[indexPath.row])
+        self.navigationController?.pushViewController(carVC, animated: true)
+    }
 }
+
 

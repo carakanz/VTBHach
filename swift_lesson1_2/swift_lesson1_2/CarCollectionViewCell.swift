@@ -18,8 +18,8 @@ class CarCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     
     private var titleLabel: UILabel!
-    private var detailLabel: UILabel!
-    private var coverImageView: UIImageView!
+    private var priceLabel: UILabel!
+    private var photoImageView: UIImageView!
     
     
     var viewModel: CarModel? {
@@ -34,10 +34,11 @@ class CarCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addAndConfigureTitleView()
-        addAndConfigureDetailView()
+        addAndConfigurePriceView()
         addAndConfigureCoverView()
         contentView.layer.borderWidth = 1
-        contentView.layer.borderColor = UIColor.white.cgColor
+        contentView.backgroundColor = .white
+        contentView.layer.borderColor = UIColor.black.cgColor
         setConstraints()
         
     }
@@ -50,45 +51,44 @@ class CarCollectionViewCell: UICollectionViewCell {
     
     private func updateContent(viewModel: CarModel) {
         titleLabel.text = viewModel.title
-        detailLabel.text = viewModel.detail
-        coverImageView.image = viewModel.cover
+        priceLabel.text = String(viewModel.price) + "Р"
+        photoImageView.image = viewModel.photo
+        
     }
     
     // MARK: -UI
     private func addAndConfigureCoverView () {
-        coverImageView = UIImageView()
-        coverImageView.image = UIImage(named: "Car")
-        coverImageView.contentMode = .scaleAspectFit
-        coverImageView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(coverImageView)
+        photoImageView = UIImageView()
+        photoImageView.image = UIImage(named: "Car")
+        photoImageView.contentMode = .scaleAspectFill
+        photoImageView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(photoImageView)
     }
     
     private func addAndConfigureTitleView () {
         titleLabel = UILabel()
-        titleLabel.textColor = .white
-        //titleLabel.backgroundColor = .black
+        titleLabel.textColor = .black
         titleLabel.font = .boldSystemFont(ofSize: 24)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(titleLabel)
     }
     
-    private func addAndConfigureDetailView () {
-        detailLabel = UILabel()
-        detailLabel.textColor = .lightGray
-        detailLabel.backgroundColor = .black
-        detailLabel.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(detailLabel)
+    private func addAndConfigurePriceView () {
+        priceLabel = UILabel()
+        priceLabel.textColor = .black
+        priceLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(priceLabel)
     }
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            coverImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
-            coverImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            coverImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor),
-            coverImageView.widthAnchor.constraint(lessThanOrEqualToConstant: 100),
-            titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 120),
-            detailLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 120),
-            detailLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10)
+            photoImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+            photoImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            photoImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            priceLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            priceLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16)
         ])
     }
 }

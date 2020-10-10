@@ -37,11 +37,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		navViewController.navigationBar.barTintColor = UIColor(red: 0.00, green: 0.38, blue: 1.00, alpha: 1.00)
 		navViewController.navigationBar.isTranslucent = false
 		navViewController.tabBarItem = findCarTabBarItem
-		let viewController = ViewController()
-		viewController.tabBarItem = favorietsTabBarItem
+		let carsViewController = FavoritesNaviganionController(rootViewController: CarsCollectionVC())
+		carsViewController.tabBarItem = favorietsTabBarItem
 		
 		let tabBar = UITabBarController()
-		tabBar.viewControllers = [navViewController, viewController]
+		tabBar.viewControllers = [navViewController, carsViewController]
 		
 		window = UIWindow(frame: UIScreen.main.bounds)
 		window?.rootViewController = tabBar
