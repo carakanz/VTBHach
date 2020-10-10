@@ -34,17 +34,19 @@ class PresenterForLoadImageView: CleanSwiftPresentationLogic {
 	}
 
     func presentImage(response: ImgLoadingModel.ImageData.Response) {
-
         if let image = response.image  {
+			var carName: String
             let viewModel = ImgLoadingModel.ImageData.ViewModel(image: image)
             viewController?.displayImage(viewModel: viewModel)
-			getCarInfo(carImage: image)
+			getCarInfo(carImage: image) { (carName) in
+				self.viewController?.displayCarName(carName: carName)
+			}
         } else {
 //            viewController?.showAlert()
         }
     }
 
-	func getCarInfo(carImage: UIImage) -> String {
+	func getCarInfo(carImage: UIImage, completion: @escaping(String)->()) {
 		let imageData: NSData = carImage.jpegData(compressionQuality: 1.0)! as NSData
 		let imageInBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
 
@@ -53,12 +55,22 @@ class PresenterForLoadImageView: CleanSwiftPresentationLogic {
 //				self.present(AlertAnswer.carNotFound.alert, animated: true, completion: nil)
 //				self.cameraState = true
 			} else {
-				guard let cars = APIResponse.probabilities.first else { return }
+				var carName = ""
+
+				let cars = APIResponse.probabilities
+				var maxProbability: Double = 0.0
+				for (name, probability) in cars {
+					if maxProbability.isLess(than: probability) {
+						maxProbability = probability
+						carName = name
+					}
+					print("The path to '\(name)' is '\(probability)'.")
+				}
+				completion(carName)
 			}
 		}) { (error) in
 			self.viewController?.alertOtherMistake()
 		}
-		return "asdf"
 	}
 
     func clearImage() {

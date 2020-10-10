@@ -15,11 +15,38 @@ protocol CleanSwiftDisplayLogic: class {
     func showImagePickerView(_ imagePickerController: UIImagePickerController)
 	func alertNoCam()
 	func alertOtherMistake()
+	func displayCarName(carName: String)
 
 //    func showAlert()
 }
 
 class LoadImageVC: UIViewController, CleanSwiftDisplayLogic {
+    var interactor: CleanSwiftBusinessLogic?
+    var presenter: CleanSwiftPresentationLogic?
+//    var delegate: ImageImportProtocol?
+    let imageView = UIImageView()
+    let galleryButton = UIButton(type: .custom)
+    let nextButton = UIButton(type: .custom)
+	var predictedCar = UILabel()
+    var helper = Styler()
+
+	let viewController : ViewController = {
+		let viewController = ViewController()
+		return viewController
+	}()
+
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		view.backgroundColor = UIColor.white
+		navigationItem.title = "Найди свою машину"
+
+		buildView()
+
+	}
+
+	func displayCarName(carName: String) {
+		predictedCar.text = carName
+	}
 
 	@objc func setImage() {
 		let request = ImgLoadingModel.ImageData.Request()
@@ -46,29 +73,6 @@ class LoadImageVC: UIViewController, CleanSwiftDisplayLogic {
         super.init(coder: aDecoder)
     }
 
-    var interactor: CleanSwiftBusinessLogic?
-    var presenter: CleanSwiftPresentationLogic?
-//    var delegate: ImageImportProtocol?
-    let imageView = UIImageView()
-    let galleryButton = UIButton(type: .custom)
-    let nextButton = UIButton(type: .custom)
-	var predictedCar = UILabel()
-    var helper = Styler()
-
-	let viewController : ViewController = {
-		let viewController = ViewController()
-		return viewController
-	}()
-
-	override func viewDidLoad() {
-		super.viewDidLoad()
-		view.backgroundColor = UIColor.white
-		navigationItem.title = "Найди свою машину"
-
-		buildView()
-
-	}
-	
 	private func updateLayout(with size: CGSize) {
 //	   tableView.frame = CGRect.init(origin: .zero, size: size)
 	}
@@ -85,14 +89,15 @@ class LoadImageVC: UIViewController, CleanSwiftDisplayLogic {
 	    }
 
 	func buildView() {
+        predictedCar.frame = CGRect(x: 30, y: 290, width: view.frame.width - 60, height: 150)
 
-        imageView.frame = CGRect(x: 30, y: 250, width: view.frame.width - 60, height: 150)
+        imageView.frame = CGRect(x: 30, y: 30, width: view.frame.width - 60, height: 150)
         imageView.image = UIImage(named: "noImg")
         imageView.contentMode = .scaleAspectFill
-        galleryButton.frame = CGRect(x: 30, y: 30, width: view.frame.width - 60, height: 50)
+        galleryButton.frame = CGRect(x: 30, y: 200, width: view.frame.width - 60, height: 50)
         galleryButton.setTitle("Загрузить фото", for: .normal)
         galleryButton.addTarget(self, action: #selector(showActionSheet), for: .touchUpInside)
-		nextButton.frame = CGRect(x: 30, y: 90, width: view.frame.width - 60, height: 50)
+		nextButton.frame = CGRect(x: 30, y: 270, width: view.frame.width - 60, height: 50)
         nextButton.setTitle("Далее", for: .normal)
         nextButton.addTarget(self, action: #selector(showActionSheet), for: .touchUpInside)
 		helper.styleHollowButton(nextButton)
@@ -101,6 +106,7 @@ class LoadImageVC: UIViewController, CleanSwiftDisplayLogic {
         view.addSubview(galleryButton)
         view.addSubview(nextButton)
         view.addSubview(imageView)
+		view.addSubview(predictedCar)
     }
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -135,7 +141,6 @@ class LoadImageVC: UIViewController, CleanSwiftDisplayLogic {
 
 	func alertOtherMistake() {
 		self.present(AlertAnswer.otherProblem.alert, animated: true, completion: nil)
-
 	}
 
 }
