@@ -59,8 +59,8 @@ class CarCollectionViewCell: UICollectionViewCell {
     // MARK: -UI
     private func addAndConfigureCoverView () {
         photoImageView = UIImageView()
-        photoImageView.image = UIImage(named: "Car")
-        photoImageView.contentMode = .scaleAspectFill
+        photoImageView.image = viewModel?.photo
+        photoImageView.contentMode = .scaleAspectFit
         photoImageView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(photoImageView)
     }
@@ -85,6 +85,7 @@ class CarCollectionViewCell: UICollectionViewCell {
             photoImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
             photoImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             photoImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            photoImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -32),
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             priceLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),

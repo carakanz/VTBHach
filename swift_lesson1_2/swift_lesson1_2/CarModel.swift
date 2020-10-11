@@ -13,10 +13,10 @@ class CarModel {
     var photo: UIImage
     var favorite: Bool
     
-    init(title: String) {
+    init(title: String, _ price: Int?, _ fav: Bool?) {
         self.title = title
-        self.photo = UIImage(named: "Car")!
-        self.price = 0
-        self.favorite = false
+        self.photo = UIImage(named: title) ?? UIImage(named: "Car")!
+        self.price = price ?? 0
+        self.favorite = fav ?? false
     }
 }

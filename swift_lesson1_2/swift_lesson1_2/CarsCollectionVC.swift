@@ -53,10 +53,11 @@ class CarsCollectionVC: UIViewController {
     }
     
     private func loadData() {
-        carModels = []
-        for _ in 0...9 {
-            carModels.append(CarModel(title: "XXX"))
-        }
+        carModels = [CarModel(title: "BMW 3 sedan", 2929300, true),
+                     CarModel(title: "Chevrolet Tahoe", 4778100, true),
+                     CarModel(title: "Jaguar F-PACE", 3798000, true),
+                     CarModel(title: "KIA K5 sedan", 1974900, true)
+        ]
     }
 }
 
