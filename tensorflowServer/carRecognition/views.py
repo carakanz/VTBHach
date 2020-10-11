@@ -9,7 +9,12 @@ from django.views.decorators.csrf import csrf_exempt
 from carRecognition.scripts.CarRecognizer import CarRecognizer
 
 
-logger = CarRecognizer.get_recognizer(path.join("carRecognition", "scripts", "mnv2_model_1.h5"))
+recognizer = CarRecognizer.get_recognizer(path.join(path.realpath('..'),
+                                                    "tensorflowServer",
+                                                    "carRecognition",
+                                                    "scripts",
+                                                    "mnv2_model_1.h5"))
+
 
 @csrf_exempt
 def car_recognize(request):
@@ -25,9 +30,9 @@ def car_recognize(request):
         return HttpResponseBadRequest("Cannot find content")
 
     try:
-        image = base64.decodebytes(content)
-        result = logger.predict(image)
-    except Exception:
+        image = base64.b64decode(content)
+        result = recognizer.predict(image)
+    except Exception as exc:
         return HttpResponseBadRequest("Invalid base64 jpg image")
 
-    return json.dumps({"probabilities": result})
+    return HttpResponse(json.dumps({"probabilities": result}))
