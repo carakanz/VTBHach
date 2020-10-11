@@ -13,7 +13,7 @@ recognizer = CarRecognizer.get_recognizer(path.join(path.realpath('..'),
                                                     "tensorflowServer",
                                                     "carRecognition",
                                                     "scripts",
-                                                    "mnv2_model_1.h5"))
+                                                    "mnv2_model_new.h5"))
 
 
 @csrf_exempt

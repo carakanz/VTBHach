@@ -15,10 +15,10 @@ class CarRecognizer(object):
 
         print("Start loading model")
         self.model = tf.keras.models.load_model(model_name)
-        self.labels = ["Hyundai Solaris sedan",
-                       "KIA Rio sedan",
-                       "SKODA OCTAVIA sedan",
-                       "Volkswagen Polo sedan",
+        self.labels = ["Hyundai Solaris",
+                       "KIA Rio",
+                       "SKODA OCTAVIA",
+                       "Volkswagen Polo",
                        "Volkswagen Tiguan"]
         self.predictions = np.array([0.2, 0.2, 0.2, 0.2, 0.2])
         self.image_size = 224
