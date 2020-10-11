@@ -41,6 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		carsViewController.tabBarItem = favorietsTabBarItem
 		
 		let tabBar = UITabBarController()
+        tabBar.tabBar.barTintColor = UIColor(red: 11/255, green: 29/255, blue: 55/255, alpha: 1)
+        tabBar.tabBar.tintColor = UIColor(red: 58/255, green: 131/255, blue: 241/255, alpha: 1)
+        tabBar.tabBar.unselectedItemTintColor = .white
 		tabBar.viewControllers = [navViewController, carsViewController]
 		
 		window = UIWindow(frame: UIScreen.main.bounds)

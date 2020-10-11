@@ -24,7 +24,7 @@ class CarsCollectionVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController!.navigationBar.tintColor = .white
-        self.navigationController!.navigationBar.barTintColor = .blue
+        self.navigationController!.navigationBar.barTintColor = UIColor(red: 0.00, green: 0.38, blue: 1.00, alpha: 1.00)
         navigationItem.title = "Избранное"
         setCollectionView()
         loadData()
